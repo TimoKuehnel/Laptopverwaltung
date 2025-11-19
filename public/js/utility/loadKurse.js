@@ -1,4 +1,5 @@
 function loadKurse($select, selectedId = null) {
+    const url = '/LaptopVerwaltungOOPWithSearch/includes/kurs/kursUtility.php';
 
     if ($select.hasClass("select2-hidden-accessible")) {
         $select.select2('destroy');
@@ -10,7 +11,7 @@ function loadKurse($select, selectedId = null) {
             : $(document.body),
 
         ajax: {
-            url: 'kurs/kursUtility.php',
+            url: url,
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -37,7 +38,7 @@ function loadKurse($select, selectedId = null) {
     if (selectedId) {
 
         $.ajax({
-            url: 'kurs/kursUtility.php',
+            url: url,
             method: 'GET',
             dataType: 'json',
             success: function (data) {

@@ -14,11 +14,13 @@ $(document).ready(function () {
         let id = row.find('td:eq(0)').text().trim();
         let vorname = row.find('td:eq(1)').text().trim();
         let nachname = row.find('td:eq(2)').text().trim();
-        let kursId = row.find('td:eq(3)').text().trim();
+        let kursId = row.find('td:eq(3)').data('id');
 
         $('#editId').val(id);
         $('#editVorname').val(vorname);
         $('#editNachname').val(nachname);
+
+        loadKurse($('#editKurs'), kursId);
 
         new bootstrap.Modal(document.getElementById('editTeilnehmerModal')).show();
     });
@@ -30,13 +32,22 @@ $(document).ready(function () {
         const data = {
             id: $('#editId').val(),
             vorname: $('#editVorname').val(),
-            nachname: $('#editNachname').val()
+            nachname: $('#editNachname').val(),
+            kursId: $('#editKurs').val()
         };
 
-        updateRecord('insertOrUpdateTeilnehmer.php', data, document.getElementById('editTeilnehmerModal'), function (response) {
-            row.find('td:eq(0)').text(data.id);
-            row.find('td:eq(1)').text(data.vorname);
-        });
+        updateRecord(
+            'insertOrUpdateTeilnehmer.php',
+            data,
+            document.getElementById('editTeilnehmerModal'),
+            function (response) {
+
+                row.find('td:eq(1)').text(data.vorname);
+                row.find('td:eq(2)').text(data.nachname);
+                row.find('td:eq(3)').text(response.kursnummer);
+                row.find('td:eq(4)').text(response.kuerzel);
+            }
+        );
     });
 
 

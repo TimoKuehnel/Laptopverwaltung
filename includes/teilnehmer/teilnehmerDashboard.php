@@ -7,7 +7,6 @@ require_once "teilnehmerService.php";
 require_once "teilnehmer.php";
 require_once "../kurs/kursService.php";
 
-
 $db = new Datenbank();
 $pdo = $db->connect();
 $service = new teilnehmerService($pdo);
@@ -85,7 +84,7 @@ $teilnehmer = $service->getAllTeilnehmer();
 
                         <div class="mb-3">
                             <label for="editKurs" class="form-label">Kurs</label>
-                            <input type="text" class="form-control" id="editKurs" required>
+                            <select id="editKurs" class="form-control" required></select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Änderungen speichern</button>
