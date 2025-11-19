@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-    $('#klasseSelect').select2({
-        dropdownParent: $('#klasseModal'),
+    $('#kursSelect').select2({
+        dropdownParent: $('#kursModal'),
         ajax: {
             url: 'kurs/kursUtility.php',
             dataType: 'json',
@@ -13,13 +13,13 @@ $(document).ready(function () {
                 return { results: data };
             }
         },
-        placeholder: "Klasse auswählen...",
+        placeholder: "Kurs auswählen...",
         minimumInputLength: 0,
         allowClear: true,
         width: "100%",
         language: {
             noResults: function () {
-                return "Keine Klassen gefunden";
+                return "Kein Kurs gefunden";
             },
             searching: function () {
                 return "Suche...";
@@ -34,15 +34,17 @@ $(document).ready(function () {
     });
 
     
-    $('#klasseWeiterBtn').on('click', function () {
-        const klasseId = $('#klasseSelect').val();
+    $('#kursWeiterBtn').on('click', function () {
+        const kursId = $('#kursSelect').val();
 
-        if (!klasseId) {
-            alert("Bitte eine Klasse auswählen!");
+        if (!kursId) {
+            showInfoModal('Fehler', 'Bitte einen Kurs auswählen.');
             return;
         }
 
-        window.location.href = "klasseTeilnehmer.php?klasse=" + klasseId;
+        $(this).prop('disabled', true);
+
+        window.location.href = "teilnehmer/kursTeilnehmer.php?kurs=" + kursId;
     });
 
 });

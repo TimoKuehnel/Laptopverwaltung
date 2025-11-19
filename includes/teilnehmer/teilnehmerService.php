@@ -12,7 +12,7 @@ class teilnehmerService
     }
 
     // Alle Teilnehmer abrufen
-    public function gettAllTeilnehmer(): array
+    public function getAllTeilnehmer(): array
     {
         $stmt = $this->pdo->query("SELECT * FROM teilnehmer");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -49,7 +49,25 @@ class teilnehmerService
         }
     }
 
-    // Teilnehmer anhand eines Suchbegriffs abrufen
+    // Datensätze anhand des Kurses abrufen
+        public function getTeilnehmerByKurs(int $kursId): array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM teilnehmer WHERE kursId  = :kursId");
+        $stmt->execute(['kursId' => $kursId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $allTeilnehmer = [];
+
+        foreach ($rows as $row) {
+            $allTeilnehmer[] = new Teilnehmer(
+                $row['teilnehmerId'],
+                $row['vorname'],
+                $row['nachname'],
+                $row['kursId']
+            );
+        }
+        return $allTeilnehmer;
+    }
 
     // Neuen Teilnehmer einfügen
     public function insertTeilnehmer(Teilnehmer $teilnehmer): bool
