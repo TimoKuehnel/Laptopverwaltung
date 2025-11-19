@@ -75,6 +75,25 @@ class GeraetService
         }
     }
 
+    // Datensätze anhand des Modells abrufen
+    public function getGeraetByModellId(int $modellId) : ?Geraet
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM geraet WHERE modellId = :modellId");
+        $stmt->execute(['modellId' => $modellId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Geraet(
+                $row['geraeteId'],
+                $row['serviceTag'],
+                $row['modellId'],
+                $row['endeLeasing'] ? new DateTime($row['endeLeasing']) : null
+            );
+        } else {
+            return null;
+        }
+    }
+
     // Neues Gerät einfügen
     public function insertGeraet(Geraet $geraet): bool
     {

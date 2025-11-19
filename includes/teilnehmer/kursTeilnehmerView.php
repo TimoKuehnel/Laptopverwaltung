@@ -21,7 +21,7 @@ $kurs = $serviceKurs->getKursById($kursId);
 
     <h3>Teilnehmer der Klasse <?= $kurs->getKursnummer(); ?></h3>
 
- <table id="geraeteTable" class="dataTable display">
+    <table id="geraeteTable" class="dataTable display">
         <thead>
             <tr>
                 <th>ID</th>
@@ -47,6 +47,9 @@ $kurs = $serviceKurs->getKursById($kursId);
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <button onclick="window.location.href='../dashboard.php';">Zurück zum Dashboard</button>
+    <button onclick="window.location.href='../logout.php';">Logout</button>
 
 </main>
 

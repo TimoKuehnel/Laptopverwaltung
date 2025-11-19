@@ -38,6 +38,7 @@
 <script src="<?= BaseURL ?>public/js/utility/infoModal.js"></script>
 <script src="<?= BaseURL ?>public/js/geraet.js"></script>
 <script src="<?= BaseURL ?>public/js/kurs.js"></script>
+<script src="<?= BaseURL ?>public/js/modell.js"></script>
 
 </body>
 

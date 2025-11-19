@@ -8,7 +8,7 @@ include "../header.php";
     echo "Willkommen, " . htmlspecialchars($auth->getUsername());
     ?>
 
-    <form id="insertGeraetForm" class="" action="insertGeraet.php" method="post">
+    <form id="insertGeraetForm" class="" action="insertOrUpdateGeraet.php" method="post">
         <input type="hidden" id="edit_id">
 
         <div class="mb-3">

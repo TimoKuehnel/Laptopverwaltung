@@ -12,7 +12,7 @@ include "header.php";
     <button onclick="window.location.href='teilnehmer/teilnehmer.php';">Teilnehmer verwalten</button>
     <button onclick="window.location.href='geraet/geraetDashboard.php';">Laptops verwalten</button>
     <button onclick="window.location.href='kurs/kursDashboard.php';">Kurse verwalten</button>
-    <button onclick="window.location.href='modell/modell.php';">Modelle verwalten</button>
+    <button onclick="window.location.href='modell/modellDashboard.php';">Modelle verwalten</button>
     <button data-bs-toggle="modal" data-bs-target="#kursModal">Teilnehmer nach Kurs anzeigen</button>
     <button onclick="window.location.href='logout.php';">Logout</button>
 

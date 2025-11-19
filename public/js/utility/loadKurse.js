@@ -42,9 +42,7 @@ $(document).ready(function () {
             return;
         }
 
-        $(this).prop('disabled', true);
-
-        window.location.href = "teilnehmer/kursTeilnehmer.php?kurs=" + kursId;
+        window.location.href = "teilnehmer/kursTeilnehmerView.php?kurs=" + kursId;
     });
 
 });
