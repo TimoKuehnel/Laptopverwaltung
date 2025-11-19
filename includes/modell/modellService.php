@@ -33,11 +33,10 @@ class ModellService
     public function searchModelle(string $search): array
     {
         $stmt = $this->pdo->prepare("
-            SELECT * FROM modell
-            WHERE modellbezeichnung LIKE :search
-            ORDER BY modellbezeichnung
-            LIMIT 50
-        ");
+                            SELECT * FROM modell 
+                            WHERE modellbezeichnung LIKE :search
+                            ORDER BY modellbezeichnung
+                            LIMIT 50");
         $stmt->execute(['search' => "%$search%"]);
 
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -52,7 +51,7 @@ class ModellService
 
         return $result;
     }
-    
+
     // Modellbezeichnung anhand der ModellId abrufen
     public function getModellNameById(int $modellId): ?string
     {

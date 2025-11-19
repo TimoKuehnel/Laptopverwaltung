@@ -32,6 +32,7 @@
 <script src="<?= BaseURL ?>public/js/dataTablesLanguage.js"></script>
 <script src="<?= BaseURL ?>public/js/dataTables.js"></script>
 <script src="<?= BaseURL ?>public/js/utility/loadModelle.js"></script>
+<script src="<?= BaseURL ?>public/js/utility/loadKurse.js"></script>
 <script src="<?= BaseURL ?>public/js/utility/crud.js"></script>
 <script src="<?= BaseURL ?>public/js/utility/ajax.js"></script>
 <script src="<?= BaseURL ?>public/js/utility/infoModal.js"></script>

@@ -91,6 +91,31 @@ class KursService
         }
     }
 
+        // Kurs anhand eines Suchbegriffs abrufen
+    public function searchKurse(string $search): array
+    {
+        $stmt = $this->pdo->prepare("
+                            SELECT * FROM kurs 
+                            WHERE kursnummer LIKE :search
+                            ORDER BY kursnummer
+                            LIMIT 50");
+        $stmt->execute(['search' => "%$search%"]);
+
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = [];
+
+        foreach ($rows as $row) {
+            $result[] = new Kurs(
+                $row['kursId'],
+                $row['kursnummer'],
+                $row['kuerzel'],
+                $row['beginn'],
+                $row['ende']
+            );
+        }
+        return $result;
+    }
+
     // Neuen Kurs einfügen
     public function insertKurs(Kurs $kurs): bool
     {
