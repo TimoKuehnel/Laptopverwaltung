@@ -91,7 +91,7 @@ class KursService
         }
     }
 
-        // Kurs anhand eines Suchbegriffs abrufen
+    // Kurs anhand eines Suchbegriffs abrufen
     public function searchKurse(string $search): array
     {
         $stmt = $this->pdo->prepare("
@@ -121,10 +121,10 @@ class KursService
     {
         $stmt = $this->pdo->prepare("INSERT INTO kurs (kursnummer, kuerzel, beginn, ende) VALUES (:kursnummer, :kuerzel, :beginn, :ende)");
         return $stmt->execute([
-            'kursnummer'    => $kurs->getKursnummer(),
-            'kuerzel'       => $kurs->getKuerzel(),
-            'beginn'        => $kurs->getBeginnForDb(),
-            'ende'          => $kurs->getEndeForDb()
+            'kursnummer' => $kurs->getKursnummer(),
+            'kuerzel' => $kurs->getKuerzel(),
+            'beginn' => $kurs->getBeginnForDb(),
+            'ende' => $kurs->getEndeForDb()
         ]);
     }
 
@@ -133,16 +133,17 @@ class KursService
     {
         $stmt = $this->pdo->prepare("UPDATE kurs SET kursnummer = :kursnummer, kuerzel = :kuerzel, beginn = :beginn, ende = :ende WHERE kursId = :kursId");
         return $stmt->execute([
-            'kursnummer'    => $kurs->getKursnummer(),
-            'kuerzel'       => $kurs->getKuerzel(),
-            'beginn'        => $kurs->getBeginnForDb(),
-            'ende'          => $kurs->getEndeForDb(),
-            'kursId'        => $kurs->getKursId()
+            'kursnummer' => $kurs->getKursnummer(),
+            'kuerzel' => $kurs->getKuerzel(),
+            'beginn' => $kurs->getBeginnForDb(),
+            'ende' => $kurs->getEndeForDb(),
+            'kursId' => $kurs->getKursId()
         ]);
     }
 
     // Kurs löschen
-    public function deleteKurs(int $kursId): bool {
+    public function deleteKurs(int $kursId): bool
+    {
         $stmt = $this->pdo->prepare("DELETE FROM kurs WHERE kursId = :kursId");
         return $stmt->execute(['kursId' => $kursId]);
     }

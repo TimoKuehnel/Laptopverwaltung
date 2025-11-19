@@ -82,7 +82,7 @@ class ModellService
     // Neues Modell einfügen
     public function insertModell(Modell $modell): bool
     {
-        $stmt = $this->pdo->prepare("INSERT INTO modell (modellbezeichnung");
+        $stmt = $this->pdo->prepare("INSERT INTO modell (modellbezeichnung) VALUES (:modellbezeichnung)");
         return $stmt->execute([
             'modellbezeichnung' => $modell->getModellbezeichnung()
         ]);
@@ -91,9 +91,10 @@ class ModellService
     // Modell aktualisieren
     public function updateModell(Modell $modell): bool
     {
-        $stmt = $this->pdo->prepare("UPDATE modell SET modellbezeichnung = :modellbezeichnung");
+        $stmt = $this->pdo->prepare("UPDATE modell SET modellbezeichnung = :modellbezeichnung WHERE modellId = :modellId");
         return $stmt->execute([
-            'modellbezeichnung' => $modell->getModellbezeichnung()
+            'modellbezeichnung' => $modell->getModellbezeichnung(),
+            'modellId'          => $modell->getModellId()
         ]);
     }
 
