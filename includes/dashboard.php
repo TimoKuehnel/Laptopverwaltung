@@ -9,7 +9,7 @@ include "header.php";
     echo "Willkommen, " . htmlspecialchars($auth->getUsername());
     ?>
 
-    <button onclick="window.location.href='teilnehmer/teilnehmer.php';">Teilnehmer verwalten</button>
+    <button onclick="window.location.href='teilnehmer/teilnehmerDashboard.php';">Teilnehmer verwalten</button>
     <button onclick="window.location.href='geraet/geraetDashboard.php';">Laptops verwalten</button>
     <button onclick="window.location.href='kurs/kursDashboard.php';">Kurse verwalten</button>
     <button onclick="window.location.href='modell/modellDashboard.php';">Modelle verwalten</button>

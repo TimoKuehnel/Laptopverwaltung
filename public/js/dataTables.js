@@ -1,10 +1,13 @@
 $(document).ready(function () {
-    $('.dataTable').each(function() {
+    $('.dataTable').each(function () {
         $(this).DataTable({
             language: languageDE,
             responsive: true,
             dom: 'Blfrtip',
-            buttons: ['copy', 'excel', 'pdf']
+            buttons: ['copy', 'excel', 'pdf'],
+            columnDefs: [
+                { targets: '_all', className: 'dt-left' }
+            ]
         });
     });
 });

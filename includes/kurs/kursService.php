@@ -51,6 +51,25 @@ class KursService
         }
     }
 
+    // Kursnummer anhand der KursId abrufen
+    public function getKursnummerById(int $kursId): ?int
+    {
+        $stmt = $this->pdo->prepare("SELECT kursnummer FROM kurs WHERE kursId = :kursId");
+        $stmt->execute(['kursId' => $kursId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row ? $row['kursnummer'] : null;
+    }
+
+        public function getKuerzelById(int $kursId): ?int
+    {
+        $stmt = $this->pdo->prepare("SELECT kuerzel FROM kurs WHERE kursId = :kursId");
+        $stmt->execute(['kursId' => $kursId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row ? $row['kuerzel'] : null;
+    }
+
     // Datensatz anhand der Kursnummer abrufen
     public function getKursByKursnummer(int $kursnummer): ?Kurs
     {
@@ -121,10 +140,10 @@ class KursService
     {
         $stmt = $this->pdo->prepare("INSERT INTO kurs (kursnummer, kuerzel, beginn, ende) VALUES (:kursnummer, :kuerzel, :beginn, :ende)");
         return $stmt->execute([
-            'kursnummer' => $kurs->getKursnummer(),
-            'kuerzel' => $kurs->getKuerzel(),
-            'beginn' => $kurs->getBeginnForDb(),
-            'ende' => $kurs->getEndeForDb()
+            'kursnummer'    => $kurs->getKursnummer(),
+            'kuerzel'       => $kurs->getKuerzel(),
+            'beginn'        => $kurs->getBeginnForDb(),
+            'ende'          => $kurs->getEndeForDb()
         ]);
     }
 
@@ -133,11 +152,11 @@ class KursService
     {
         $stmt = $this->pdo->prepare("UPDATE kurs SET kursnummer = :kursnummer, kuerzel = :kuerzel, beginn = :beginn, ende = :ende WHERE kursId = :kursId");
         return $stmt->execute([
-            'kursnummer' => $kurs->getKursnummer(),
-            'kuerzel' => $kurs->getKuerzel(),
-            'beginn' => $kurs->getBeginnForDb(),
-            'ende' => $kurs->getEndeForDb(),
-            'kursId' => $kurs->getKursId()
+            'kursnummer'    => $kurs->getKursnummer(),
+            'kuerzel'       => $kurs->getKuerzel(),
+            'beginn'        => $kurs->getBeginnForDb(),
+            'ende'          => $kurs->getEndeForDb(),
+            'kursId'        => $kurs->getKursId()
         ]);
     }
 

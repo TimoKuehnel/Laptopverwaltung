@@ -39,6 +39,7 @@
 <script src="<?= BaseURL ?>public/js/geraet.js"></script>
 <script src="<?= BaseURL ?>public/js/kurs.js"></script>
 <script src="<?= BaseURL ?>public/js/modell.js"></script>
+<script src="<?= BaseURL ?>public/js/teilnehmer.js"></script>
 
 </body>
 

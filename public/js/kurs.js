@@ -77,3 +77,23 @@ $(document).ready(function () {
         deleteRecord('deleteKurs.php', id, row, document.getElementById('deleteKursModal'));
     });
 });
+
+// Alle Kurse laden
+$(document).ready(function () {
+
+    $('#kursModal').on('shown.bs.modal', function () {
+        loadKurse($('#kursSelect'));
+    });
+
+    $('#kursWeiterBtn').on('click', function () {
+        const kursId = $('#kursSelect').val();
+
+        if (!kursId) {
+            showInfoModal('Fehler', 'Bitte einen Kurs auswählen.');
+            return;
+        }
+
+        window.location.href = "teilnehmer/kursTeilnehmerView.php?kurs=" + kursId;
+    });
+
+});

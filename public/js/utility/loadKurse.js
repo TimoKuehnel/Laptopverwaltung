@@ -1,7 +1,14 @@
-$(document).ready(function () {
+function loadKurse($select, selectedId = null) {
 
-    $('#kursSelect').select2({
-        dropdownParent: $('#kursModal'),
+    if ($select.hasClass("select2-hidden-accessible")) {
+        $select.select2('destroy');
+    }
+
+    $select.select2({
+        dropdownParent: ($select.closest('.modal').length > 0)
+            ? $select.closest('.modal')
+            : $(document.body),
+
         ajax: {
             url: 'kurs/kursUtility.php',
             dataType: 'json',
@@ -13,36 +20,43 @@ $(document).ready(function () {
                 return { results: data };
             }
         },
+
         placeholder: "Kurs auswählen...",
         minimumInputLength: 0,
         allowClear: true,
         width: "100%",
+
         language: {
-            noResults: function () {
-                return "Kein Kurs gefunden";
+            noResults: function () { return "Kein Kurs gefunden"; },
+            searching: function () { return "Suche..."; },
+            errorLoading: function () { return "Fehler beim Laden der Ergebnisse"; },
+            inputTooShort: function () { return "Bitte Suchbegriff eingeben..."; }
+        }
+    });
+
+    if (selectedId) {
+
+        $.ajax({
+            url: 'kurs/kursUtility.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                const kurs = data.find(k => k.id == selectedId);
+                if (!kurs) return;
+
+                const option = new Option(
+                    kurs.text,
+                    kurs.id,
+                    true,
+                    true
+                );
+
+                $select.append(option).trigger('change');
             },
-            searching: function () {
-                return "Suche...";
-            },
-            errorLoading: function () {
-                return "Fehler beim Laden der Ergebnisse";
-            },
-            inputTooShort: function () {
-                return "Bitte Suchbegriff eingeben...";
+            error: function (xhr, status, error) {
+                console.error("Fehler beim Laden des ausgewählten Kurses:", status, error);
             }
-        }
-    });
-
-    
-    $('#kursWeiterBtn').on('click', function () {
-        const kursId = $('#kursSelect').val();
-
-        if (!kursId) {
-            showInfoModal('Fehler', 'Bitte einen Kurs auswählen.');
-            return;
-        }
-
-        window.location.href = "teilnehmer/kursTeilnehmerView.php?kurs=" + kursId;
-    });
-
-});
+        });
+    }
+}

@@ -55,7 +55,7 @@ $modelle = $service->getAllModelle();
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModellModalLabel">Gerät bearbeiten</h5>
+                    <h5 class="modal-title" id="editModellModalLabel">Modell bearbeiten</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
                 </div>
                 <div class="modal-body">
@@ -78,12 +78,12 @@ $modelle = $service->getAllModelle();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="deleteModellModalLabel">Gerät löschen</h5>
+                    <h5 class="modal-title" id="deleteModellModalLabel">Modell löschen</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Schließen"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Möchten Sie dieses Gerät wirklich löschen?</p>
+                    <p>Möchten Sie dieses Modell wirklich löschen?</p>
                     <p><strong id="deleteInfo"></strong></p>
                     <input type="hidden" id="delete_id">
                 </div>
