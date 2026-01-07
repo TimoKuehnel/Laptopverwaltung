@@ -61,7 +61,7 @@ class KursService
         return $row ? $row['kursnummer'] : null;
     }
 
-        public function getKuerzelById(int $kursId): ?int
+    public function getKuerzelById(int $kursId): ?int
     {
         $stmt = $this->pdo->prepare("SELECT kuerzel FROM kurs WHERE kursId = :kursId");
         $stmt->execute(['kursId' => $kursId]);
@@ -115,7 +115,7 @@ class KursService
     {
         $stmt = $this->pdo->prepare("
                             SELECT * FROM kurs 
-                            WHERE kursnummer LIKE :search
+                            WHERE CAST(kursnummer AS CHAR) LIKE :search
                             ORDER BY kursnummer
                             LIMIT 50");
         $stmt->execute(['search' => "%$search%"]);
@@ -125,11 +125,11 @@ class KursService
 
         foreach ($rows as $row) {
             $result[] = new Kurs(
-                $row['kursId'],
-                $row['kursnummer'],
-                $row['kuerzel'],
-                $row['beginn'],
-                $row['ende']
+                (int) $row['kursId'],
+                (int) $row['kursnummer'],
+                (int) $row['kuerzel'],
+                $row['beginn'] ? new DateTime($row['beginn']) : null,
+                $row['ende'] ? new DateTime($row['ende']) : null
             );
         }
         return $result;
@@ -140,10 +140,10 @@ class KursService
     {
         $stmt = $this->pdo->prepare("INSERT INTO kurs (kursnummer, kuerzel, beginn, ende) VALUES (:kursnummer, :kuerzel, :beginn, :ende)");
         return $stmt->execute([
-            'kursnummer'    => $kurs->getKursnummer(),
-            'kuerzel'       => $kurs->getKuerzel(),
-            'beginn'        => $kurs->getBeginnForDb(),
-            'ende'          => $kurs->getEndeForDb()
+            'kursnummer' => $kurs->getKursnummer(),
+            'kuerzel' => $kurs->getKuerzel(),
+            'beginn' => $kurs->getBeginnForDb(),
+            'ende' => $kurs->getEndeForDb()
         ]);
     }
 
@@ -152,11 +152,11 @@ class KursService
     {
         $stmt = $this->pdo->prepare("UPDATE kurs SET kursnummer = :kursnummer, kuerzel = :kuerzel, beginn = :beginn, ende = :ende WHERE kursId = :kursId");
         return $stmt->execute([
-            'kursnummer'    => $kurs->getKursnummer(),
-            'kuerzel'       => $kurs->getKuerzel(),
-            'beginn'        => $kurs->getBeginnForDb(),
-            'ende'          => $kurs->getEndeForDb(),
-            'kursId'        => $kurs->getKursId()
+            'kursnummer' => $kurs->getKursnummer(),
+            'kuerzel' => $kurs->getKuerzel(),
+            'beginn' => $kurs->getBeginnForDb(),
+            'ende' => $kurs->getEndeForDb(),
+            'kursId' => $kurs->getKursId()
         ]);
     }
 
